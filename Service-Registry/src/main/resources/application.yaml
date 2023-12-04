@@ -1,0 +1,10 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: 3.109.144.20
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+   

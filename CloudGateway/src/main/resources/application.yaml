@@ -1,0 +1,32 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: CLOUD-GATEWAY
+  config:
+    import: configserver:http://3.109.144.20:9296 
+cloud:
+  gateway:
+    routes:
+      - id: ORDER-SERVICE
+        uri: lb://ORDER-SERVICE
+        predicates:
+          - Path=/order/**
+      - id: PRODUCT-SERVICE
+        uri: lb://PRODUCT-SERVICE
+        predicates:
+          - Path=/product/**
+      - id: PAYMENT-SERVICE
+        uri: lb://PAYMENT-SERVICE
+        predicates:
+          - Path=/payment/**
+          
+    
+# src/main/resources/application.yml
+okta:
+  oauth2:
+    issuer: https://dev-tmg5a43cjkk6skb6.us.auth0.com/
+    audience: api://default
+    client-id: QA0sJjgFGFbCa7VUNFY7KqkNlG0OGi5L
+    client-secret: JdEw6Vb2h4-eln78wzRI50WmGM0u2SQe8ICi82V0hydBIiAZFmtD3JSMie4CfJqD
+    scopes: openid, email, profile, offline_access
